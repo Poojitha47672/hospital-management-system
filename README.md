@@ -20,6 +20,7 @@ pip install -r requirements.txt
 
 Create a `.env` file in the root:
 
+```bash
 SECRET_KEY=your-django-secret-key
 DEBUG=True
 DB_NAME=hms_db
@@ -28,6 +29,7 @@ DB_PASSWORD=your_postgres_password
 DB_HOST=localhost
 DB_PORT=5432
 EMAIL_SERVICE_URL=http://localhost:3000/dev/send-email
+```
 
 ### 3. Database Setup
 
