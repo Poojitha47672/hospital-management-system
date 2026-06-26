@@ -1,0 +1,37 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h2>Doctor Dashboard</h2>
+<p>Welcome, Dr. {{ request.user.get_full_name }}</p>
+
+<br>
+<a href="{% url 'google_auth' %}" class="link-calendar">🔗 Connect Google Calendar</a><br>
+<a href="{% url 'add_slot' %}" class="btn btn-primary">+ Add Availability Slot</a>
+
+<h3>Your Slots</h3>
+{% if slots %}
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Status</th>
+    </tr>
+    {% for slot in slots %}
+    <tr>
+        <td>{{ slot.date }}</td>
+        <td>{{ slot.start_time }}</td>
+        <td>{{ slot.end_time }}</td>
+        <td>
+            {% if slot.is_booked %}
+            <span class="badge-booked">Booked</span>
+            {% else %}
+            <span class="badge-available">Available</span>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No slots added yet.</p>
+{% endif %}
+{% endblock %}

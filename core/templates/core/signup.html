@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="card" style="max-width: 450px; margin: 0 auto;">
+    <h2>Sign Up</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            <label>{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+            <small style="color:#999; font-size:12px;">{{ field.help_text }}</small>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <input type="submit" value="Sign Up">
+    </form>
+    <p style="margin-top: 16px;">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+</div>
+{% endblock %}

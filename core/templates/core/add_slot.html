@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="card" style="max-width: 400px;">
+    <h2>Add Availability Slot</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Date</label>
+            <input type="date" name="date" required>
+        </div>
+        <div class="form-group">
+            <label>Start Time</label>
+            <input type="time" name="start_time" required>
+        </div>
+        <div class="form-group">
+            <label>End Time</label>
+            <input type="time" name="end_time" required>
+        </div>
+        <input type="submit" value="Add Slot">
+    </form>
+    <br>
+    <a href="{% url 'doctor_dashboard' %}">← Back to Dashboard</a>
+</div>
+{% endblock %}

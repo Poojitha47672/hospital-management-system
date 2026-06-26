@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h2>Patient Dashboard</h2>
+<p>Welcome, {{ request.user.get_full_name }}</p>
+
+<br>
+<a href="{% url 'google_auth' %}" class="link-calendar">🔗 Connect Google Calendar</a>
+
+<h3>Available Doctors & Slots</h3>
+{% for doctor in doctors %}
+<h4>Dr. {{ doctor.get_full_name }}</h4>
+{% with slots=doctor.slots.all %}
+{% if slots %}
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Action</th>
+    </tr>
+    {% for slot in slots %}
+    {% if not slot.is_booked %}
+    <tr>
+        <td>{{ slot.date }}</td>
+        <td>{{ slot.start_time }}</td>
+        <td>{{ slot.end_time }}</td>
+        <td><a href="{% url 'book_slot' slot.id %}" class="btn btn-success">Book</a></td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+</table>
+{% else %}
+<p>No slots available.</p>
+{% endif %}
+{% endwith %}
+{% endfor %}
+
+<hr style="margin: 30px 0;">
+<h3>My Appointments</h3>
+{% if my_appointments %}
+<table>
+    <tr>
+        <th>Doctor</th>
+        <th>Date</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+    </tr>
+    {% for appt in my_appointments %}
+    <tr>
+        <td>Dr. {{ appt.slot.doctor.get_full_name }}</td>
+        <td>{{ appt.slot.date }}</td>
+        <td>{{ appt.slot.start_time }}</td>
+        <td>{{ appt.slot.end_time }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No appointments booked yet.</p>
+{% endif %}
+{% endblock %}

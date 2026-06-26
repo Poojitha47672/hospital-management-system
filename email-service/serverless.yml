@@ -1,0 +1,31 @@
+org: poojitha61
+app: hms-email-service
+service: hms-email-service
+
+provider:
+  name: aws
+  runtime: python3.11
+  region: us-east-1
+  environment:
+    SMTP_HOST: smtp.gmail.com
+    SMTP_PORT: 587
+    SMTP_USER: poojithabattula44@gmail.com
+    SMTP_PASSWORD: ipmqqypoblzmsgum
+    
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    httpPort: 3000
+
+functions:
+  sendEmail:
+    handler: handler.send_email
+    timeout: 30
+    events:
+      - http:
+          path: send-email
+          method: post
+          cors: true
