@@ -6,12 +6,6 @@ provider:
   name: aws
   runtime: python3.11
   region: us-east-1
-  environment:
-    SMTP_HOST: smtp.gmail.com
-    SMTP_PORT: 587
-    SMTP_USER: poojithabattula44@gmail.com
-    SMTP_PASSWORD: ipmqqypoblzmsgum
-    
 
 plugins:
   - serverless-offline
